@@ -22,6 +22,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- Fontawesome library -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- Semantic UI -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/semantic.min.css') }}">
 </head>
 <body>
     <div id="app">
@@ -88,5 +90,7 @@
             </div>
         </main>
     </div>
+    <!-- Semantic UI -->
+    <script src="{{ asset('js/semantic.min.js') }}"></script>
 </body>
 </html>
