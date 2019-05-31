@@ -6,10 +6,10 @@
             <i class="fas fa-home logosize"></i>&nbsp;Home
         </a>
         <a id="index-message" class="item">
-            <i class="fas fa-comment-alt logosize"></i>&nbsp;Messages
+            <i class="fas fa-comment-alt logosize"></i>&nbsp;Steps
         </a>
         <a id="index-friends" class="item">
-            <i class="fas fa-users logosize"></i>&nbsp;Friends
+            <i class="fas fa-users logosize"></i>&nbsp;Billing
         </a>
         <div class="right menu">
           <div class="item">

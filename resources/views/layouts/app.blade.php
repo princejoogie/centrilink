@@ -30,7 +30,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="web-logo" src="{{ asset('img/logo.png') }}">
+                    <i class="fas fa-hospital-alt" style="font-size: 25px;"></i>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -108,10 +108,20 @@
                         $("#index-friends").removeClass("active");
                         $("#index-content").html("");
                         $.ajax({
-                            url : "/fetchData"
+                            url : "/fetchData",
+                            beforeSend : function() {
+                                $("#index-content").html(
+                                    '<div class="ui active centered inline loader"></div>'
+                                );
+                            }
                         }).done(
                             function(data) {
-                                $("#index-content").html("<span style='color:red;'>"+data+"</span>");
+                                var user = JSON.parse(data);
+                                $("#index-content").html(
+                                    "Name: <span style='color:red;'>"+user.name+"</span>" +
+                                    "<br>" +
+                                    "Email: <span style='color:red;'>"+user.email+"</span>"
+                                );
                             }
                         );
                     }
@@ -123,7 +133,64 @@
                         $("#index-home").removeClass("active");
                         $("#index-friends").removeClass("active");
                         $("#index-content").html("");
-                        $("#index-content").html("messge");
+
+                        $.ajax({
+                            url : "/fetchSteps",
+                            beforeSend : function() {
+                                $("#index-content").html(
+                                    '<div class="ui active centered inline loader"></div>'
+                                );
+                            }
+                        }).done(
+                            function(data) {
+                                var user = JSON.parse(data);
+
+                                var str = '<div class="ui ordered steps">';
+                                
+                                $.each(user, function(key, value) {
+                                    //str += key + ":" + value[0] + "," + value[1] + "," +value[2] + "<br><br>";
+                                    if(value[2] == true) {
+                                        str += '<div class="completed step">';
+                                    } else {
+                                        str += '<div class="active step">';
+                                    }
+                                    str += '<div class="content">';
+                                    str += '<div class="title">' + value[0] + '</div>';
+                                    str += '<div class="description">' + value[1] + '</div>';
+                                    str += '</div></div>';
+                                });
+
+                                str += '</div>';
+                                
+                                $("#index-content").html(
+                                   str
+                                );
+                            }
+                        );
+
+
+
+                        var htmlCode = '<div class="ui ordered steps"> \
+                                            <div class="completed step"> \
+                                                <div class="content"> \
+                                                <div class="title">X-Ray Department</div> \
+                                                <div class="description"></div> \
+                                                </div>\
+                                            </div>\
+                                            <div class="completed step">\
+                                                <div class="content">\
+                                                <div class="title">Checkup</div>\
+                                                <div class="description"></div>\
+                                                </div>\
+                                            </div>\
+                                            <div class="active step">\
+                                                <div class="content">\
+                                                <div class="title">Payment</div>\
+                                                <div class="description">Return to Receptionist</div>\
+                                                </div>\
+                                            </div>\
+                                            </div>';
+                        $("#index-content").html(htmlCode);
                     }
                 );
                 $("#index-friends").click(
@@ -136,7 +203,7 @@
                     }
                 );
             }
-        );    
+        );   
     </script>
 </body>
 </html>
