@@ -90,7 +90,53 @@
             </div>
         </main>
     </div>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
     <!-- Semantic UI -->
     <script src="{{ asset('js/semantic.min.js') }}"></script>
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(
+            function() {
+                $("#index-home").click(
+                    function(e) {
+                        e.preventDefault(); // will not switch page
+                        $("#index-home").addClass("active");
+                        $("#index-message").removeClass("active");
+                        $("#index-friends").removeClass("active");
+                        $("#index-content").html("");
+                        $.ajax({
+                            url : "/fetchData"
+                        }).done(
+                            function(data) {
+                                $("#index-content").html("<span style='color:red;'>"+data+"</span>");
+                            }
+                        );
+                    }
+                );
+                $("#index-message").click(
+                    function(e) {
+                        e.preventDefault(); // will not switch page
+                        $("#index-message").addClass("active");
+                        $("#index-home").removeClass("active");
+                        $("#index-friends").removeClass("active");
+                        $("#index-content").html("");
+                        $("#index-content").html("messge");
+                    }
+                );
+                $("#index-friends").click(
+                    function(e) {
+                        e.preventDefault(); // will not switch page
+                        $("#index-friends").addClass("active");
+                        $("#index-message").removeClass("active");
+                        $("#index-home").removeClass("active");
+                        $("#index-content").html("friends");
+                    }
+                );
+            }
+        );    
+    </script>
 </body>
 </html>

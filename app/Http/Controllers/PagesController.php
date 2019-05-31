@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class PagesController extends Controller
 {
@@ -22,5 +23,10 @@ class PagesController extends Controller
             'services' => ['Service One', 'Service Two', 'Service Three     ']
         );
         return view('pages.services')->with($data);
+    }
+
+    public function fetchData() {
+        $user = User::where('id', 1)->first();
+        return $user->name;
     }
 }
